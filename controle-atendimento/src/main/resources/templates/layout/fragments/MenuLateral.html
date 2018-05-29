@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<body>
+	<aside id="left-panel" class="left-panel" th:fragment="layout-sidebar">
+		<nav class="navbar navbar-expand-sm navbar-default">
+
+			<div class="navbar-header">
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#main-menu" aria-controls="main-menu"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<i class="fa fa-bars"></i>
+				</button>
+				<a class="navbar-brand" href="./"><img
+					th:src="@{/layout/images/logo.png}" alt="Logo"></a> <a
+					class="navbar-brand hidden" href="./"><img
+					th:src="@{/layout/images/logo2.png}" alt="Logo"></a>
+			</div>
+
+			<div id="main-menu" class="main-menu collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a th:href="@{/index}"> <i
+							class="menu-icon fa fa-dashboard"></i>Página Inicial
+					</a></li>
+					<h3 class="menu-title">Cadastro</h3>
+					<!-- /.menu-title -->
+					<li class="menu-item-has-children dropdown"><a href="#"
+						class="dropdown-toggle" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"> <i
+							class="menu-icon fa fa-address-card-o"></i>Clientes
+					</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><i class="menu-icon  fa fa-plus"></i><a
+								th:href="@{/usuarios/novo}">Novo Cliente</a></li>
+							<li><i class="menu-icon  fa fa-search"></i><a
+								href="tables-data.html">Buscar Cliente</a></li>
+							<li><i class="menu-icon  fa fa-pencil-square-o"></i><a
+								href="tables-data.html">Editar Cliente</a></li>
+						</ul></li>
+					<li class="menu-item-has-children dropdown"><a href="#"
+						class="dropdown-toggle" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"> <i
+							class="menu-icon fa fa-user"></i>Usuários
+					</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><i class="menu-icon  fa fa-plus"></i><a
+								th:href="@{/usuarios/novo}">Novo Usuário</a></li>
+							<li><i class="menu-icon  fa fa-search"></i><a
+								href="tables-data.html">Buscar Usuário</a></li>
+							<li><i class="menu-icon  fa fa-pencil-square-o"></i><a
+								href="tables-data.html">Editar Usuário</a></li>
+						</ul></li>
+
+					<h3 class="menu-title">Relatórios</h3>
+					<!-- /.menu-title -->
+					<li class="menu-item-has-children dropdown"><a href="#"
+						class="dropdown-toggle" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"> <i
+							class="menu-icon fa fa-file-text-o"></i>Relatórios de Atendimento
+					</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><i class="menu-icon  fa fa-shopping-bag"></i><a
+								th:href="@{/usuarios/novo}">Gálago</a></li>
+						</ul>
+						<ul class="sub-menu children dropdown-menu">
+							<li><i class="menu-icon  fa fa-shopping-bag"></i><a
+								th:href="@{/usuarios/novo}">Netspeed</a></li>
+						</ul></li>
+
+
+					<h3 class="menu-title">Utilitários</h3>
+					<!-- /.menu-title -->
+					<li class="menu-item-has-children dropdown"><a href="#"
+						class="dropdown-toggle" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"> <i
+							class="menu-icon fa fa-info-circle"></i>Ajuda
+					</a>
+						<ul class="sub-menu children dropdown-menu">
+							<li><i class="menu-icon fa fa-question-circle"></i><a
+								href="page-login.html">Help</a></li>
+							<li><i class="menu-icon fa fa-exclamation-circle"></i><a
+								href="page-register.html">Erros Comuns</a></li>
+							<li><i class="menu-icon fa fa-book"></i><a
+								href="pages-forget.html">Manual</a></li>
+						</ul></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</nav>
+	</aside>
+	<!-- /#left-panel -->
+
+</body>
+</html>
