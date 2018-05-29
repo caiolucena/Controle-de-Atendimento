@@ -45,10 +45,10 @@ public class Usuario implements Serializable {
 	@NotBlank(message = " O nome é obrigatório")
 	protected String nome;
 	
-	@Size(min = 4,message = " A senha deve possuir no mínimo 3 dígitos")
+	@Size(min = 3,message = " A senha deve possuir no mínimo 3 dígitos")
 	protected String senha;
 		
-	@Size(min = 4, message = " Confirmação de senha deve possuir no mínimo 3 dígitos")
+	@Size(min = 3, message = " Confirmação de senha deve possuir no mínimo 3 dígitos")
 	@Transient
 	protected String confirmacaoSenha;
 	

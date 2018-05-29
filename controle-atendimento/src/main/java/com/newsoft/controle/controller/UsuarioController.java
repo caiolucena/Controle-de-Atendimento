@@ -11,13 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.newosft.controle.service.exception.ItemDuplicadoException;
+import com.newosft.controle.service.exception.LoginDuplicadoException;
+import com.newosft.controle.service.exception.SenhaObrigatoriaUsuarioException;
 import com.newsoft.controle.model.Usuario;
 import com.newsoft.controle.repository.Grupos;
 import com.newsoft.controle.service.CadastroUsuarioService;
-
-import br.uepb.biblio.service.exception.ItemDuplicadoException;
-import br.uepb.biblio.service.exception.LoginDuplicadoException;
-import br.uepb.biblio.service.exception.SenhaObrigatoriaUsuarioException;
 
 @Controller
 @RequestMapping("/usuarios")
@@ -61,7 +60,7 @@ public class UsuarioController {
 
 		attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");
 
-		return new ModelAndView("redirect:/usuario/CadastroUsuario");
+		return new ModelAndView("redirect:/usuarios/novo");
 
 	}
 }
