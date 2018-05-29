@@ -1,7 +1,7 @@
-var Erp = Erp ||{}
+var Atendimento = Atendimento ||{}
 var $ = jQuery;
 
-Erp.MaskMoney = (function(){
+Atendimento.MaskMoney = (function(){
 	function MaskMoney(){
 		this.decimal =  $('.js-decimal');
 		this.plain = $('.js-plain');
@@ -13,7 +13,7 @@ Erp.MaskMoney = (function(){
 	return MaskMoney;
 }());
 
-Erp.MaskPhoneNumber = (function() {
+Atendimento.MaskPhoneNumber = (function() {
 	
 	function MaskPhoneNumber() {
 		this.inputPhoneNumber = $('.js-phone-number');
@@ -37,7 +37,7 @@ Erp.MaskPhoneNumber = (function() {
 	
 }());
 
-Erp.MaskCpf = (function(){
+Atendimento.MaskCpf = (function(){
 
 	function MaskCpf(){
 		this.inputCpf = $('.js-cpf');
@@ -50,7 +50,7 @@ Erp.MaskCpf = (function(){
 	return MaskCpf;
 }());
 
-Erp.MaskCfop = (function(){
+Atendimento.MaskCfop = (function(){
 
 	function MaskCfop(){
 		this.inputCfop = $('.js-cfop');
@@ -63,7 +63,7 @@ Erp.MaskCfop = (function(){
 	return MaskCfop;
 }());
 
-Erp.MaskNcm = (function(){
+Atendimento.MaskNcm = (function(){
 
 	function MaskNcm(){
 		this.inputNcm = $('.js-ncm');
@@ -76,7 +76,7 @@ Erp.MaskNcm = (function(){
 	return MaskNcm;
 }());
 
-Erp.MaskCest = (function(){
+Atendimento.MaskCest = (function(){
 
 	function MaskCest(){
 		this.inputCest = $('.js-cest');
@@ -89,7 +89,7 @@ Erp.MaskCest = (function(){
 	return MaskCest;
 }());
 
-Erp.MaskIcms = (function(){
+Atendimento.MaskIcms = (function(){
 
 	function MaskIcms(){
 		this.inputIcms = $('.js-icms');
@@ -102,7 +102,7 @@ Erp.MaskIcms = (function(){
 	return MaskIcms;
 }());
 
-Erp.MaskCnpj = (function(){
+Atendimento.MaskCnpj = (function(){
 
 	function MaskCnpj(){
 		this.inputCnpj = $('.js-cnpj');
@@ -115,7 +115,7 @@ Erp.MaskCnpj = (function(){
 	return MaskCnpj;
 }());
 
-Erp.MaskCep = (function() {
+Atendimento.MaskCep = (function() {
 	
 	function MaskCep() {
 		this.inputCep = $('.js-cep');
@@ -133,31 +133,31 @@ Erp.MaskCep = (function() {
 
 $(function(){
 
-		var maskMoney = new Erp.MaskMoney();
+		var maskMoney = new Atendimento.MaskMoney();
 		maskMoney.enable();
 		
-		var maskPhoneNumber = new Erp.MaskPhoneNumber();
+		var maskPhoneNumber = new Atendimento.MaskPhoneNumber();
 		maskPhoneNumber.enable();
 		
-		var maskCpf = new Erp.MaskCpf();
+		var maskCpf = new Atendimento.MaskCpf();
 		maskCpf.enable();
 		
-		var maskCep = new Erp.MaskCep();
+		var maskCep = new Atendimento.MaskCep();
 		maskCep.enable();
 		
-		var maskCnpj = new Erp.MaskCnpj();
+		var maskCnpj = new Atendimento.MaskCnpj();
 		maskCnpj.enable();
 		
-		var maskCfop = new Erp.MaskCfop();
+		var maskCfop = new Atendimento.MaskCfop();
 		maskCfop.enable();
 		
-		var maskNcm = new Erp.MaskNcm();
+		var maskNcm = new Atendimento.MaskNcm();
 		maskNcm.enable();
 		
-		var maskCest = new Erp.MaskCest();
+		var maskCest = new Atendimento.MaskCest();
 		maskCest.enable();
 		
-		var maskIcms = new Erp.MaskIcms();
+		var maskIcms = new Atendimento.MaskIcms();
 		maskIcms.enable();
 		
 		
