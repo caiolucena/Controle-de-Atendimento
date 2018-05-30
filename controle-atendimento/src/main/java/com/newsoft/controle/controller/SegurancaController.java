@@ -45,6 +45,10 @@ public class SegurancaController {
 	public String paginaInicial() {
 		return "index";
 	}
+	@GetMapping()
+	public String ini() {
+		return "index";
+	}
 	
 	
 }
