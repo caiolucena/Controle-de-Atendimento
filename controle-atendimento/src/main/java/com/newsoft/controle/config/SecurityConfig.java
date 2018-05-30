@@ -51,7 +51,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring()
 		.antMatchers("/layout/**")
-		.antMatchers("/images/**");
+		.antMatchers("/images/**")
+		.antMatchers("/stylesheets/**");
 	}
 	@Bean
 	public PasswordEncoder passwordEncoder() {

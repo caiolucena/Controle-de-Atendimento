@@ -4,6 +4,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Essa é a classe Controller da classe Seguranca, e é responsável por fazer a ponte entre as views referentes a esse objeto e os Models, de acordo com as solicitações realizadas nas rotas.
@@ -18,9 +20,10 @@ public class SegurancaController {
 	 * @param user, que são os dados do login do usuário
 	 * @return "redirect:/tccs/novo", que redireciona o usuário para a página da biblioteca em caso do login estar correto
 	 */
-	@GetMapping("/login")
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(@AuthenticationPrincipal User user){
-		if(user!= null) {
+		if(user != null) {
+			System.out.println(user.getPassword());
 			return "redirect:/index";
 		}
 		return "Login";
@@ -41,14 +44,13 @@ public class SegurancaController {
 	 * Esse método é responsável por renderizar a pagina inicial do sistema
 	 * @return index, que é a pagina inicial da biblioteca
 	 */
-	@GetMapping("/index")
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String paginaInicial() {
 		return "index";
 	}
 	@GetMapping()
-	public String ini() {
+	public String pagina() {
 		return "index";
 	}
-	
 	
 }
