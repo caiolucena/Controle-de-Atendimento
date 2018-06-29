@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="'layout/LayoutPadrao'">
+
+<head>
+<title>Cadastro de Usuário</title>
+</head>
+<body>
+	<section>
+		<!-- Right Panel -->
+
+		<div id="right-panel" class="right-panel" layout:fragment="conteudo">
+
+			<!-- Header-->
+			<header id="header" class="header">
+
+				<div class="header-menu">
+
+					<div class="col-sm-7">
+						<a id="menuToggle" class="menutoggle pull-left"><i
+							class="fa fa fa-tasks"></i></a>
+						<div class="header-left">
+							<div></div>
+
+							<div></div>
+						</div>
+					</div>
+
+					<div class="col-sm-5 float-right">
+						<ul>
+							<li style="list-style-type: none" class="float-right">
+								<p class="navbar-text"
+									th:text="${#authentication.principal.usuario.nome}">Usuario</p>
+								<a class="nav-link float-right " th:href="@{/logout}"><i
+									class="fa fa-sign-out"></i>Sair</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+			</header>
+			<!-- /header -->
+			<!-- Header-->
+
+			<!-- até aqui tem q ter em todos -->
+			<div class="breadcrumbs">
+				<div class="col-sm-4">
+					<div class="page-header float-left">
+						<div class="page-title">
+							<h1>Cadastro de Chamado</h1>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-8">
+					<div class="page-header float-right">
+						<div class="page-title">
+							<ol class="breadcrumb text-right">
+								<li class="active"><a href="#" data-toggle="modal"
+									data-target="#modalHelpCadastroUsuario">Dúvidas no
+										preenchimento? Clique aqui</a></li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div>
+
+				<th:block th:include="fragments/MensagemSucesso"></th:block>
+
+				<form method="POST"
+					class="form-vertical  js-form-loading content mt-3"
+					th:object="${chamado}" th:action="@{/usuarios/novo}">
+
+					<th:block th:include="fragments/MensagensErroValidacao"></th:block>
+					<!-- Linha do Nome -->
+					<div class="row">
+						<div class="form-group col-sm-7">
+							<label for="dataRecebimento">Data de Recebimento*</label> <input
+								id="dataRecebimento" type="text" class="form-control js-date"
+								th:field="*{dataRecebimento}"
+								th:classappend="${#fields.hasErrors('dataRecebimento')}? is-invalid"
+								autofocus="autofocus" autocomplete="off" />
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="form-group col-sm-4 bw-required">
+							<label for="dataEnvio">Data de Envio*</label> <input
+								id="dataEnvio" type="text" class="form-control js-date"
+								th:field="*{dataEnvio}"
+								th:classappend="${#fields.hasErrors('dataEnvio')}? is-invalid"
+								autocomplete="off" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group  col-sm-4 col-lg-3 bw-required">
+							<label class="control-label">Consultores*</label>
+							<div>
+
+								<th:block th:each="consultor: ${consultores}">
+									<div class="checkbox  checkbox-inline">
+										<input type="checkbox" th:value="${consultor.id}"
+											th:field="*{consultor}"
+											th:classappend="${#fields.hasErrors('consultor')}? is-invalid" />
+										<label th:for="${#ids.prev('consultores')}"
+											th:text="${consultor.nome}"></label>
+									</div>
+								</th:block>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-sm-12">
+							<label for="descricao">Informações adicionais</label>
+							<textarea id="descricao" class="form-control"
+								placeholder="Se necessário, insira informações adicionais sobre esse chamado"
+								th:field="*{observacao}"
+								th:classappend="${#fields.hasErrors('*{observacao}')}? is-invalid"
+								tabindex="2" autocomplete="off"></textarea>
+						</div>
+					</div>
+					<button type="submit" class="btn  btn-primary">Salvar</button>
+					<a th:href="@{/index}" class="btn btn-danger">Cancelar</a>
+				</form>
+			</div>
+			<div th:replace="modal/usuario/HelpCadastroUsuario :: modal"></div>
+		</div>
+
+	</section>
+	<th:block layout:fragment="javascript-extra">
+		<!-- <script th:src="@{/javascripts/usuario.remover.js}"></script> -->
+	</th:block>
+
+</body>
+
+</html>
