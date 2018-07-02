@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import com.newsoft.controle.model.enums.Status;
 
 @Entity
 @Table(name = "chamado")
@@ -25,12 +29,10 @@ public class Chamado {
 	private int id;
 
 	
-	@Column(name = "data_inicio_preenchimento")
-	private LocalDateTime dataInicioPreenchimento;
 	
 	
-	@Column(name = "data_fim_preenchimento")
-	private LocalDateTime dataFimPreenchimento;
+	@Column(name = "data_preenchimento")
+	private LocalDateTime dataPreenchimento;
 	
 	@NotNull(message = " Informe a data em que o chamado foi recebido.")
 	@Column(name = "data_recebimento")
@@ -44,16 +46,40 @@ public class Chamado {
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Consultor consultor;
 	
+	
+	@JoinColumn(name = "usuario_id")
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Usuario usuario;
+	
+	
+	
 	private String observacao;
 	
-
+	@Enumerated(EnumType.STRING)
+	private Status status;
 	
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
 	public String getObservacao() {
 		return observacao;
 	}
 
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public Consultor getConsultor() {
@@ -72,23 +98,15 @@ public class Chamado {
 		this.id = id;
 	}
 
-	public LocalDateTime getDataInicioPreenchimento() {
-		return dataInicioPreenchimento;
-	}
-
-	public void setDataInicioPreenchimento(LocalDateTime dataInicioPreenchimento) {
-		this.dataInicioPreenchimento = dataInicioPreenchimento;
-	}
-
-	public LocalDateTime getDataFimPreenchimento() {
-		return dataFimPreenchimento;
-	}
-
-	public void setDataFimPreenchimento(LocalDateTime dataFimPreenchimento) {
-		this.dataFimPreenchimento = dataFimPreenchimento;
-	}
-
 	
+	public LocalDateTime getDataPreenchimento() {
+		return dataPreenchimento;
+	}
+
+	public void setDataPreenchimento(LocalDateTime dataPreenchimento) {
+		this.dataPreenchimento = dataPreenchimento;
+	}
+
 	public LocalDate getDataRecebimento() {
 		return dataRecebimento;
 	}

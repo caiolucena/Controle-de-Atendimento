@@ -26,21 +26,8 @@
 					<li class="active"><a th:href="@{/index}"> <i
 							class="menu-icon fa fa-dashboard"></i>Página Inicial
 					</a></li>
-					<h3 class="menu-title">Cadastro</h3>
+					<h3 class="menu-title">Cadastros</h3>
 					<!-- /.menu-title -->
-					<li class="menu-item-has-children dropdown"><a href="#"
-						class="dropdown-toggle" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> <i
-							class="menu-icon fa fa-address-card-o"></i>Clientes
-					</a>
-						<ul class="sub-menu children dropdown-menu">
-							<li><i class="menu-icon  fa fa-plus"></i><a
-								th:href="@{/usuarios/novo}">Novo Cliente</a></li>
-							<li><i class="menu-icon  fa fa-search"></i><a
-								href="tables-data.html">Buscar Cliente</a></li>
-							<li><i class="menu-icon  fa fa-pencil-square-o"></i><a
-								href="tables-data.html">Editar Cliente</a></li>
-						</ul></li>
 					<li class="menu-item-has-children dropdown"><a href="#"
 						class="dropdown-toggle" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"> <i
@@ -48,13 +35,22 @@
 					</a>
 						<ul class="sub-menu children dropdown-menu">
 							<li><i class="menu-icon  fa fa-plus"></i><a
-								th:href="@{/usuarios/novo}">Novo Usuário</a></li>
+								th:href="@{/usuarios/novo}">Cadastrar Usuário</a></li>
 							<li><i class="menu-icon  fa fa-search"></i><a
 								href="tables-data.html">Buscar Usuário</a></li>
-							<li><i class="menu-icon  fa fa-pencil-square-o"></i><a
-								href="tables-data.html">Editar Usuário</a></li>
+						
 						</ul></li>
-
+					<li sec:authorize-url="/chamados/novo" class="menu-item-has-children dropdown"><a href="#"
+						class="dropdown-toggle" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"> <i
+							class="menu-icon fa fa-user"></i>Chamados
+					</a>
+						<ul  class="sub-menu children dropdown-menu">
+							<li sec:authorize-url="/chamados/novo"><i class="menu-icon  fa fa-plus"></i><a
+								th:href="@{/chamados/novo}">Cadastrar Chamado</a></li>
+							<li sec:authorize-url="/chamados/busca"><i class="menu-icon  fa fa-search"></i><a
+								th:href="@{/chamados/busca}">Buscar Chamado</a></li>
+						</ul></li>
 					<h3 class="menu-title">Relatórios</h3>
 					<!-- /.menu-title -->
 					<li class="menu-item-has-children dropdown"><a href="#"
@@ -87,8 +83,11 @@
 							<li><i class="menu-icon fa fa-book"></i><a
 								href="pages-forget.html">Manual</a></li>
 						</ul></li>
-						
-						<a th:href="@{/logout}"><h3 class="menu-title">Sair  <em class="fa  fa-sign-out"></h3></em></a>
+
+					<a th:href="@{/logout}"><h3 class="menu-title">
+							Sair <em class="fa  fa-sign-out">
+						</h3>
+						</em></a>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->

@@ -20,7 +20,7 @@ import com.newsoft.controle.repository.Grupos;
 
 /**
  * Essa é a classe de configuração do JPA, responsável por estabelecer a conexão com o Banco de dados
- * @author EquipeACL
+ * @author Newsoft
  *
  */
 @Configuration
