@@ -72,12 +72,12 @@
 
 				<form method="POST"
 					class="form-vertical  js-form-loading content mt-3"
-					th:object="${chamado}" th:action="@{/usuarios/novo}">
+					th:object="${chamado}" th:action="@{/chamados/novo}">
 
 					<th:block th:include="fragments/MensagensErroValidacao"></th:block>
 					<!-- Linha do Nome -->
 					<div class="row">
-						<div class="form-group col-sm-7">
+						<div class="form-group col-sm-3">
 							<label for="dataRecebimento">Data de Recebimento*</label> <input
 								id="dataRecebimento" type="text" class="form-control js-date"
 								th:field="*{dataRecebimento}"
@@ -87,7 +87,7 @@
 					</div>
 
 					<div class="row">
-						<div class="form-group col-sm-4 bw-required">
+						<div class="form-group col-sm-3">
 							<label for="dataEnvio">Data de Envio*</label> <input
 								id="dataEnvio" type="text" class="form-control js-date"
 								th:field="*{dataEnvio}"
@@ -96,20 +96,15 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="form-group  col-sm-4 col-lg-3 bw-required">
-							<label class="control-label">Consultores*</label>
-							<div>
-
-								<th:block th:each="consultor: ${consultores}">
-									<div class="checkbox  checkbox-inline">
-										<input type="checkbox" th:value="${consultor.id}"
-											th:field="*{consultor}"
-											th:classappend="${#fields.hasErrors('consultor')}? is-invalid" />
-										<label th:for="${#ids.prev('consultores')}"
-											th:text="${consultor.nome}"></label>
-									</div>
-								</th:block>
-							</div>
+						<div class="form-group  col-sm-4 col-lg-3">
+							<label for="consultor" class="control-label">Consultor</label> <select
+								id="consultor" th:field="*{consultor.id}"
+								class="form-control"
+								th:classappend="${#fields.hasErrors('*{consultor.id}')}? is-invalid">
+								<option value="0">Selecione um Consultor</option>
+								<option th:each="consultor: ${consultores}" th:value="${consultor.id}"
+									th:text="${consultor.nome}"></option>
+							</select>
 						</div>
 					</div>
 					<div class="row">

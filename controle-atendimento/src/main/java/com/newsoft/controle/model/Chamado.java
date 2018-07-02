@@ -29,14 +29,14 @@ public class Chamado {
 	private LocalDateTime dataInicioPreenchimento;
 	
 	
-	@Column(name = "data_inicio_preenchimento")
+	@Column(name = "data_fim_preenchimento")
 	private LocalDateTime dataFimPreenchimento;
 	
-	@NotNull(message = " Informa a data em que o chamado foi recebido.")
+	@NotNull(message = " Informe a data em que o chamado foi recebido.")
 	@Column(name = "data_recebimento")
 	private LocalDate dataRecebimento;
 	
-	@NotNull(message = " Informa a data em que o chamado foi enviado.")
+	@NotNull(message = " Informe a data em que o chamado foi enviado.")
 	@Column(name = "data_envio")
 	private LocalDate dataEnvio;
 	
