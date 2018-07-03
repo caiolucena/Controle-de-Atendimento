@@ -38,7 +38,7 @@ INSERT INTO `estado` VALUES (1,'AC'),(2,'AL'),(3,'PA'),(4,'BA'),(5,'AP'),(6,'MA'
 # Structure for table "grupo"
 #
 
-CREATE TABLE `grupo` (
+CREATE TABLE `grupo_acesso` (
   `id` int(11) NOT NULL ,
   `nome` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
@@ -48,7 +48,7 @@ CREATE TABLE `grupo` (
 # Data for table "grupo"
 #
 
-INSERT INTO `grupo` VALUES (1,'Administrador'),(2,'Gerente Financeiro'),(3,'Gerente Comercial'),(4,'Financeiro'),(5,'Comercial');
+INSERT INTO `grupo_acesso` VALUES (1,'Administrador'),(2,'Gerente Financeiro'),(3,'Gerente Comercial'),(4,'Financeiro'),(5,'Comercial');
 
 
 #
@@ -71,12 +71,12 @@ INSERT INTO `permissao` VALUES (1,'CADASTRAR_USUARIO'),(2,'CADASTRAR_CHAMADO');
 # Structure for table "grupo_has_permissao"
 #
 
-CREATE TABLE `grupo_has_permissao` (
-  `grupo_id` int(11) NOT NULL,
+CREATE TABLE `grupo_acesso_has_permissao` (
+  `grupo_acesso_id` int(11) NOT NULL,
   `permissao_id` int(11) NOT NULL,
-  PRIMARY KEY (`grupo_id`,`permissao_id`),
+  PRIMARY KEY (`grupo_acesso_id`,`permissao_id`),
   KEY `permissao_id` (`permissao_id`),
-  CONSTRAINT `grupo_has_permissao_ibfk_1` FOREIGN KEY (`grupo_id`) REFERENCES `grupo` (`id`),
+  CONSTRAINT `grupo_has_permissao_ibfk_1` FOREIGN KEY (`grupo_acesso_id`) REFERENCES `grupo_acesso` (`id`),
   CONSTRAINT `grupo_has_permissao_ibfk_2` FOREIGN KEY (`permissao_id`) REFERENCES `permissao` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -85,12 +85,12 @@ CREATE TABLE `grupo_has_permissao` (
 #
 
 #PERIMSSÕES DO ADM
-INSERT INTO `grupo_has_permissao` VALUES (1,1);
+INSERT INTO `grupo_acesso_has_permissao` VALUES (1,1);
 
 #PERMISSÕES DO FINANCEIRO (KEROLAINE) 4 
 
 #PERMISSÕES DO COMERCIAL (ISLA) 5 
-INSERT INTO `grupo_has_permissao` VALUES (5,2);
+INSERT INTO `grupo_acesso_has_permissao` VALUES (5,2);
 
 #
 # Structure for table "usuario"
@@ -114,22 +114,36 @@ INSERT INTO `usuario` VALUES (1,'Caio Lucena','caio','$2a$10$8IAlZZ5BX1huMcpp2kg
 # Structure for table "usuario_has_grupo"
 #
 
-CREATE TABLE `usuario_has_grupo` (
+CREATE TABLE `usuario_has_grupo_acesso` (
   `usuario_id` int(11) NOT NULL AUTO_INCREMENT,
-  `grupo_id` int(11) NOT NULL,
-  PRIMARY KEY (`usuario_id`,`grupo_id`),
-  KEY `grupo_id` (`grupo_id`),
+  `grupo_acesso_id` int(11) NOT NULL,
+  PRIMARY KEY (`usuario_id`,`grupo_acesso_id`),
+  KEY `grupo_acesso_id` (`grupo_acesso_id`),
   CONSTRAINT `usuario_has_grupo_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`),
-  CONSTRAINT `usuario_has_grupo_ibfk_2` FOREIGN KEY (`grupo_id`) REFERENCES `grupo` (`id`)
+  CONSTRAINT `usuario_has_grupo_ibfk_2` FOREIGN KEY (`grupo_acesso_id`) REFERENCES `grupo_acesso` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # Data for table "usuario_has_grupo"
 #
 
-INSERT INTO `usuario_has_grupo` VALUES (1,1);
+INSERT INTO `usuario_has_grupo_acesso` VALUES (1,1),(1,2),(1,3),(1,4),(1,5);
 
 
+create table `grupo`(
+	`id` int(11) NOT NULL,
+    `NOME_GRUPO` varchar(20),
+	PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+INSERT INTO grupo (id, NOME_GRUPO)
+            VALUES (1, 'NETSPEED');
+INSERT INTO grupo (id, NOME_GRUPO)
+            VALUES (9, 'GALAGO');
+INSERT INTO grupo (id, NOME_GRUPO)
+            VALUES (0, '');
+            
 create table `cliente` (
   `id` int(11) NOT NULL,
   `nome` varchar(80),
@@ -142,9 +156,41 @@ create table `cliente` (
   `fax` varchar(20),
   `fonecontato` varchar(20),
   `vendedor` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`grupo`)
+  REFERENCES `atendimento`.`grupo` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+create table `vendedor` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(50),
+  `fone_contato` varchar(20),
+  `celular` varchar(20),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+create table `chamado` (
+  `id` int(11) NOT NULL auto_increment,
+  `data_preenchimento` datetime NOT NULL,
+  `data_recebimento` date NOT NULL,
+  `data_envio` date NOT NULL,
+  `observacao` varchar(240),
+  `status` enum("PENDENTE","REALIZADO"),
+  `nome_cliente` varchar(100) NOT NULL, #no caso de ser prospecção,  o nome do cliente vai ser inserido
+  `vendedor_id` int(11) NOT NULL, 
+  `usuario_id` int(11) NOT NULL,
+  `cliente_id` int(11),#se for cliente antigo, vai ser inserido o código
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`vendedor_id`)
+  REFERENCES `atendimento`.`vendedor` (`id`),
+  FOREIGN KEY (`usuario_id`)
+  REFERENCES `atendimento`.`usuario` (`id`),
+  FOREIGN KEY (`cliente_id`)
+  REFERENCES `atendimento`.`cliente` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO cliente (id, NOME, NOMEFANTASIA, CIDADER, UFR, GRUPO, FONERESIDENCIAL, FONEMOVEL, FAX, FONECONTATO, VENDEDOR)
+              VALUES (0, 'PROSPECÇÃO - Insira o nome aqui', 'PROSPECÇÃO - Insira o nome aqui', '', '', 0, '', '', '', '', 0);
 INSERT INTO cliente (id, NOME, NOMEFANTASIA, CIDADER, UFR, GRUPO, FONERESIDENCIAL, FONEMOVEL, FAX, FONECONTATO, VENDEDOR)
               VALUES (3, 'PEDRO TARGINO FELIX', 'PEDRO TARGINO FELIX', 'SANTA RITA', 'PB', 1, '30320583', '999347218', '', '', 1);
 INSERT INTO cliente (id, NOME, NOMEFANTASIA, CIDADER, UFR, GRUPO, FONERESIDENCIAL, FONEMOVEL, FAX, FONECONTATO, VENDEDOR)
@@ -2288,14 +2334,6 @@ INSERT INTO cliente (id, NOME, NOMEFANTASIA, CIDADER, UFR, GRUPO, FONERESIDENCIA
 INSERT INTO cliente (id, NOME, NOMEFANTASIA, CIDADER, UFR, GRUPO, FONERESIDENCIAL, FONEMOVEL, FAX, FONECONTATO, VENDEDOR)
               VALUES (1630, 'SHOTGUN STORE - COMERCIO DE ARMAS E MUNICOES EIRELI', 'SHOTGUN STORE', 'CAMPINA GRANDE', 'PB', 9, '', '', '', '8898-1016', 12);
 
-create table `vendedor` (
-  `id` int(11) NOT NULL,
-  `nome` varchar(50),
-  `fone_contato` varchar(20),
-  `celular` varchar(20),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 INSERT INTO VENDEDOR (id, NOME, FONE_CONTATO, CELULAR)
               VALUES (1, 'EDINALDO', '', '');
@@ -2314,17 +2352,3 @@ INSERT INTO VENDEDOR (id, NOME, FONE_CONTATO, CELULAR)
 INSERT INTO VENDEDOR (id, NOME, FONE_CONTATO, CELULAR)
               VALUES (15, 'ALESANDRO', '', '');
 
-
-create table `chamado` (
-  `id` int(11) NOT NULL,
-  `data_inicio_preenchimento` datetime NOT NULL,
-  `data_fim_preenchimento` datetime NOT NULL,
-  `data_recebimento` date NOT NULL,
-  `data_envio` date NOT NULL,
-  `observacao` varchar(240),
-  `status` boolean,
-  `vendedor_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (`vendedor_id`)
-  REFERENCES `atendimento`.`vendedor` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
