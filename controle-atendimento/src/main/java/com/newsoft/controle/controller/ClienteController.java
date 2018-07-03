@@ -20,9 +20,10 @@ public class ClienteController {
 	
 	@RequestMapping(method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public @ResponseBody ResponseEntity<?> buscar(@RequestBody Cliente cliente){
-		System.out.println(cliente.getId());
+		
+		
 		Cliente retorno = clientes.findOne(cliente.getId());
-		System.out.println(retorno.getNome());
+		
 		return ResponseEntity.ok(retorno);
 	} 
 }

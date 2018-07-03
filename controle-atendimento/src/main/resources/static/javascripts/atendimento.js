@@ -102,6 +102,20 @@ Atendimento.MaskCep = (function() {
 	return MaskCep;
 
 }());
+Atendimento.MaskCod = (function() {
+
+	function MaskCod() {
+		this.inputCod = $('.js-cod');
+	}
+
+	MaskCod.prototype.enable = function() {
+		this.inputCod.mask('0000');
+	}
+
+	return MaskCod;
+
+}());
+
 
 Atendimento.MaskDate = (function() {
 
@@ -113,6 +127,7 @@ Atendimento.MaskDate = (function() {
 		this.inputDate.mask('00/00/0000');
 		this.inputDate.datepicker({
 			// orientation: 'bottom',
+			todayHighlight: true,
 			language : 'pt-BR',
 			autoclose : true
 		});
@@ -168,5 +183,8 @@ $(function() {
 	
 	var maskHour = new Atendimento.MaskHour();
 	maskHour.enable();
+	
+	var maskCod = new Atendimento.MaskCod();
+	maskCod.enable();
 
 });

@@ -50,6 +50,7 @@ public class ChamadoController {
 			
 		try {
 			chamado.setUsuario(usuarioSistema.getUsuario());
+			
 			cadastroChamadoService.salvar(chamado);
 		}
 		catch(RuntimeException e){

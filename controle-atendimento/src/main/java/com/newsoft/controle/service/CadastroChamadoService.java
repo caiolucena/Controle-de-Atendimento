@@ -29,6 +29,12 @@ public class CadastroChamadoService {
 		try {
 			chamado.setStatus(Status.PENDENTE);
 			chamado.setDataPreenchimento((LocalDateTime.now()));
+
+			if(chamado.getCliente().getId() == 0) {
+				
+				chamado.getCliente().setId(1);
+				
+			}
 			Chamado retorno =  chamados.saveAndFlush(chamado);
 			return retorno;
 		} catch (Exception e) {

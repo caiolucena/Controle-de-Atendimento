@@ -28,6 +28,26 @@ function selecionouEstado(id, url) {
 
 }
 
+function usouCheckbox(){
+	var checkBox = $("#jaCliente");
+	var codigo = $("#codigoCliente");
+	var nome = $("#nomeCliente");
+
+	
+	if(checkBox.prop("checked")){
+		
+		codigo.prop('readonly',false);
+		nome.prop('readonly',true);
+	}
+	
+	else{
+		nome.val('PROSPECÇÃO - Insira o nome do cliente aqui');
+		codigo.val(0);
+		codigo.prop('readonly',true);	
+		nome.prop('readonly',false);
+	}
+}
+
 
 function selecionouCliente(id, url) {
 	$.ajax({
@@ -46,7 +66,7 @@ function selecionouCliente(id, url) {
 		document.getElementById("nomeCliente").value = cliente.nome;
 	}
 	function erroCliente() {
-		console.log('Erro em carregar o Cliente!')
+		document.getElementById("nomeCliente").value = "Não há cliente cadastrado com o código informado";
 	}
 
 }
