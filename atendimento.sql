@@ -109,6 +109,8 @@ CREATE TABLE `usuario` (
 #
 
 INSERT INTO `usuario` VALUES (1,'Caio Lucena','caio','$2a$10$8IAlZZ5BX1huMcpp2kgrQ.pRfiWe2s1BDhH7YiKiqA8mdcsQvw24e');
+INSERT INTO `usuario` VALUES (2,'Rodolfo','rodolfo','$2a$10$8IAlZZ5BX1huMcpp2kgrQ.pRfiWe2s1BDhH7YiKiqA8mdcsQvw24e');
+INSERT INTO `usuario` VALUES (3,'Glenio','glenio','$2a$10$8IAlZZ5BX1huMcpp2kgrQ.pRfiWe2s1BDhH7YiKiqA8mdcsQvw24e');
 
 #
 # Structure for table "usuario_has_grupo"
@@ -128,6 +130,8 @@ CREATE TABLE `usuario_has_grupo_acesso` (
 #
 
 INSERT INTO `usuario_has_grupo_acesso` VALUES (1,1),(1,2),(1,3),(1,4),(1,5);
+INSERT INTO `usuario_has_grupo_acesso` VALUES (2,1),(2,2),(2,3),(2,4),(2,5);
+INSERT INTO `usuario_has_grupo_acesso` VALUES (3,1),(3,2),(3,3),(3,4),(3,5);
 
 
 create table `grupo`(
@@ -190,7 +194,7 @@ create table `chamado` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO cliente (id, NOME, NOMEFANTASIA, CIDADER, UFR, GRUPO, FONERESIDENCIAL, FONEMOVEL, FAX, FONECONTATO, VENDEDOR)
-              VALUES (0, 'PROSPECÇÃO - Insira o nome aqui', 'PROSPECÇÃO - Insira o nome aqui', '', '', 0, '', '', '', '', 0);
+              VALUES (1, 'PROSPECÇÃO - Insira o nome do cliente aqui', 'PROSPECÇÃO - Insira o nome do cliente aqui','SANTA RITA', 'PB', 1, '30320583', '999347218', '', '', 1);
 INSERT INTO cliente (id, NOME, NOMEFANTASIA, CIDADER, UFR, GRUPO, FONERESIDENCIAL, FONEMOVEL, FAX, FONECONTATO, VENDEDOR)
               VALUES (3, 'PEDRO TARGINO FELIX', 'PEDRO TARGINO FELIX', 'SANTA RITA', 'PB', 1, '30320583', '999347218', '', '', 1);
 INSERT INTO cliente (id, NOME, NOMEFANTASIA, CIDADER, UFR, GRUPO, FONERESIDENCIAL, FONEMOVEL, FAX, FONECONTATO, VENDEDOR)
@@ -2351,4 +2355,7 @@ INSERT INTO VENDEDOR (id, NOME, FONE_CONTATO, CELULAR)
               VALUES (12, 'WALNNER', '', '');
 INSERT INTO VENDEDOR (id, NOME, FONE_CONTATO, CELULAR)
               VALUES (15, 'ALESANDRO', '', '');
+
+
+
 
