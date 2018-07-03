@@ -2328,9 +2328,3 @@ create table `chamado` (
   FOREIGN KEY (`vendedor_id`)
   REFERENCES `atendimento`.`vendedor` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-
-
-
