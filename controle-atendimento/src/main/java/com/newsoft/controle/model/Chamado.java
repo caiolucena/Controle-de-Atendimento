@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.newsoft.controle.model.enums.Status;
 
 @Entity
@@ -55,18 +57,62 @@ public class Chamado {
 	@Column(name = "nome_cliente")
 	private String nomeCliente;
 	
+	@Column(name = "nome_consultor")
+	private String nomeConsultor;
 	
 	private String observacao;
+	
+	@NotBlank(message = " Telefone do cliente é obrigatório!")
+	private String telefone;
+	
+	@NotBlank(message = " Email do cliente é obrigatório!")
+	private String email;
+	
+	@Column(name = "telefone_opt")
+	private String telefoneOpt;
 	
 	@Enumerated(EnumType.STRING)
 	private Status status;
 	
+	
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public String getTelefoneOpt() {
+		return telefoneOpt;
+	}
+
+	public void setTelefoneOpt(String telefoneOpt) {
+		this.telefoneOpt = telefoneOpt;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public Status getStatus() {
 		return status;
 	}
 
 	public void setStatus(Status status) {
 		this.status = status;
+	}
+
+	public String getNomeConsultor() {
+		return nomeConsultor;
+	}
+
+	public void setNomeConsultor(String nomeConsultor) {
+		this.nomeConsultor = nomeConsultor;
 	}
 
 	public String getObservacao() {

@@ -29,19 +29,24 @@ function selecionouEstado(id, url) {
 }
 
 function usouCheckbox(){
-	var checkBox = $("#jaCliente");
+	var radioCadastrado = $("#clienteCadastrado");
+	var radioNaoCadastrado = $("#clienteNaoCadastrado");
 	var codigo = $("#codigoCliente");
 	var nome = $("#nomeCliente");
 
-	
-	if(checkBox.prop("checked")){
-		
+	if(radioCadastrado.prop("checked")){
+
 		codigo.prop('readonly',false);
 		nome.prop('readonly',true);
+		nome.val('');
+		codigo.val('');
+		codigo.focus();
 	}
 	
-	else{
+	else if(radioNaoCadastrado.prop("checked")){
+
 		nome.val('PROSPECÇÃO - Insira o nome do cliente aqui');
+		nome.focus();
 		codigo.val(0);
 		codigo.prop('readonly',true);	
 		nome.prop('readonly',false);
@@ -62,11 +67,20 @@ function selecionouCliente(id, url) {
 	});
 
 	function alterarCliente(cliente) {
-
-		document.getElementById("nomeCliente").value = cliente.nome;
+		console.log("Nao deu erro aqui");
+		var nomeCliente = $("#nomeCliente");
+		if(cliente){
+			nomeCliente.val(cliente.nome);	
+		}
+		else{
+			nomeCliente.val("Não há cliente cadastrado com o código informado");
+		}
+		
 	}
 	function erroCliente() {
-		document.getElementById("nomeCliente").value = "Não há cliente cadastrado com o código informado";
+		var nomeCliente = $("#nomeCliente");
+	
+		nomeCliente.val("Não há cliente cadastrado com o código informado");
 	}
 
 }

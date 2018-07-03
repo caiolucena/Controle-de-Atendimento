@@ -5,14 +5,14 @@ package com.newosft.controle.service.exception;
  * @author EquipeACL
  *
  */
-public class ItemDuplicadoException extends RuntimeException{
+public class ConsultorComChamadoPendenteException extends RuntimeException{
 	private static final long serialVersionUID = 1L;
 	
 	/**
 	 * Método responsável por notificar o Item Duplicado
 	 * @param message, que é a mensagem referente ao item duplicado
 	 */
-	public ItemDuplicadoException(String message) {
+	public ConsultorComChamadoPendenteException(String message) {
 		super(message);
 	}
 

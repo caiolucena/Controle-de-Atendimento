@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.newosft.controle.service.exception.ItemDuplicadoException;
+import com.newosft.controle.service.exception.ConsultorComChamadoPendenteException;
 import com.newosft.controle.service.exception.LoginDuplicadoException;
 import com.newosft.controle.service.exception.SenhaObrigatoriaUsuarioException;
 import com.newsoft.controle.model.Usuario;
@@ -46,7 +46,7 @@ public class UsuarioController {
 		try {
 			cadastroUsuarioService.salvar(usuario);
 		}
-		catch (ItemDuplicadoException e){
+		catch (ConsultorComChamadoPendenteException e){
 			result.rejectValue("nome", e.getMessage(),e.getMessage());
 			return (novo(usuario));
 		}

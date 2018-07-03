@@ -11,7 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.newosft.controle.service.exception.ItemDuplicadoException;
+import com.newosft.controle.service.exception.ConsultorComChamadoPendenteException;
 import com.newosft.controle.service.exception.LoginDuplicadoException;
 import com.newsoft.controle.model.Usuario;
 import com.newsoft.controle.repository.Usuarios;
@@ -32,7 +32,7 @@ public class CadastroUsuarioService {
 	public Usuario salvar (Usuario usuario) {
 		Optional <Usuario> usuarioOptional = usuarios.findByNomeIgnoreCase(usuario.getNome());
 		if(usuarioOptional.isPresent()){
-			throw new ItemDuplicadoException(" Usuário já Cadastrado!");
+			throw new ConsultorComChamadoPendenteException(" Usuário já Cadastrado!");
 		}
 		
 		usuarioOptional = usuarios.findByLoginIgnoreCase(usuario.getLogin());

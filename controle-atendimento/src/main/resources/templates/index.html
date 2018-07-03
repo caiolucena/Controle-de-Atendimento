@@ -71,98 +71,21 @@
 
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-sm-4" sec:authorize-url="/produtos/novo">
+					<div class="col-sm-4" sec:authorize-url="/prospeccao/novo">
 						<div class="aw-box">
-							<div class="aw-box__icon">
-								<i class="fa  fa fa-money  fa-3x"></i>
-							</div>
-							<div class="aw-box__value" th:text = "*{valorEstoque}">R$90.542,59</div>
-							<div class="aw-box__title">Valor do estoque</div>
-						</div>
-					</div>
-
-					<div class="col-sm-4" sec:authorize-url="/produtos/novo">
-						<div class="aw-box">
-							<div class="aw-box__icon">
-								<i class="fa  fa-hashtag  fa-3x"></i>
-							</div>
-							<div class="aw-box__value" th:text="*{qntItens}">123</div>
-							<div class="aw-box__title">Itens no estoque</div>
-						</div>
-					</div>
-
-					<div class="col-sm-4" sec:authorize-url="/clientes/novo">
-						<div class="aw-box">
-							<div class="aw-box__icon">
-								<i class="fa  fa-users  fa-3x"></i>
-							</div>
-							<div class="aw-box__value" th:text="*{qntClientes}">9</div>
-							<div class="aw-box__title">Total de clientes</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="row" sec:authorize-url="/usuarios/novo">
-					<div class="col-sm-4">
-						<div class="aw-box">
-							<div class="aw-box__icon">
-								<i class="fa  fa-usd  fa-3x"></i>
-							</div>
-							<div class="aw-box__value" th:text ="*{vendasNoAno}">R$3.542,59</div>
-							<div class="aw-box__title">Valor vendido no ano</div>
-						</div>
-					</div>
-
-					<div class="col-sm-4">
-						<div class="aw-box">
-							<div class="aw-box__icon">
-								<i class="fa fa-usd   fa-3x"></i>
-							</div>
-							<div class="aw-box__value" th:text ="*{vendasNoMes}">R$1.233,40</div>
-							<div class="aw-box__title">Valor vendido no mês</div>
-						</div>
-					</div>
-
-				</div>
-
-				<div class="row"sec:authorize-url="/usuarios/novo">
-					<div class="col-sm-6">
-						<div class="aw-graph-box">
-							<div class="aw-graph-box__header">
-								<h2 class="aw-graph-box__title">
-									Vendas por mês <small>últimos 6 meses (em breve)</small>
-								</h2>
-							</div>
-							<div class="aw-graph-box__content">
-								<div class="aw-graph-box__no-data">
-									<i class="fa  fa-line-chart  fa-2x"></i> <span>Não há
-										dados</span>
+							<div th:switch="*{chamadoPendente}">
+								<div th:case="'1'">
+									<div class="aw-box__value">
+										Você possui 1 chamado pendente <a th:href="@{/chamados/novo}"
+											class="btn btn-primary">Visualizar Chamado</a>
+									</div>
 								</div>
-								<div>
-									<canvas id="lineChart" height="160"></canvas>
-								</div>
+								<div class="aw-box__value" th:case="'0'">Você não possui
+									chamados pendentes</div>
 							</div>
 						</div>
 					</div>
 
-					<div class="col-sm-6">
-						<div class="aw-graph-box">
-							<div class="aw-graph-box__header">
-								<h2 class="aw-graph-box__title">
-									Vendas por origem <small>últimos 6 meses (em breve)</small>
-								</h2>
-							</div>
-							<div class="aw-graph-box__content">
-								<div class="aw-graph-box__no-data">
-									<i class="fa  fa-line-chart  fa-2x"></i> <span>Não há
-										dados</span>
-								</div>
-								<div>
-									<canvas id="barChart" height="160"></canvas>
-								</div>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
 

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.newosft.controle.service.exception.ConsultorComChamadoPendenteException;
 import com.newsoft.controle.model.Chamado;
 import com.newsoft.controle.repository.Consultores;
 import com.newsoft.controle.security.UsuarioSistema;
@@ -50,11 +51,12 @@ public class ChamadoController {
 			
 		try {
 			chamado.setUsuario(usuarioSistema.getUsuario());
-			
+			chamado.setNomeConsultor(consultores.findOne(chamado.getConsultor().getId()).getNome());
 			cadastroChamadoService.salvar(chamado);
 		}
-		catch(RuntimeException e){
-			
+		catch (ConsultorComChamadoPendenteException e){
+			result.rejectValue("consultor", e.getMessage(),e.getMessage());
+			return (novo(chamado));
 		}
 		attributes.addFlashAttribute("mensagem", "Chamado salvo com sucesso!");
 		

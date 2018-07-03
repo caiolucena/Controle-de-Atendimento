@@ -34,6 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 			.antMatchers("/usuarios/novo").hasAuthority("CADASTRAR_USUARIO")
 			.antMatchers("/chamados/novo").hasAuthority("CADASTRAR_CHAMADO")
+			.antMatchers("/prospeccao/novo").hasAuthority("CADASTRAR_PROSPECCAO")
 			.anyRequest().authenticated()
 			
 			.and()
