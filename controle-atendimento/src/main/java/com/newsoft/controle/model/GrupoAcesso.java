@@ -14,8 +14,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "grupo")
-public class Grupo implements Serializable{
+@Table(name = "grupo_acesso")
+public class GrupoAcesso implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -27,7 +27,7 @@ public class Grupo implements Serializable{
 	
 	@NotNull(message = "Selecione pelo menos uma permissao")
 	@ManyToMany
-	@JoinTable(name = "grupo_has_permissao",joinColumns = @JoinColumn(name = "grupo_id")
+	@JoinTable(name = "grupo_acesso_has_permissao",joinColumns = @JoinColumn(name = "grupo_acesso_id")
 												, inverseJoinColumns = @JoinColumn(name = "permissao_id"))
 	private List<Permissao> permissoes;
 
@@ -71,7 +71,7 @@ public class Grupo implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Grupo other = (Grupo) obj;
+		GrupoAcesso other = (GrupoAcesso) obj;
 		if (id != other.id)
 			return false;
 		return true;

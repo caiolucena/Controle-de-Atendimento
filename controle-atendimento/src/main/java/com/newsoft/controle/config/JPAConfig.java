@@ -16,7 +16,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.newsoft.controle.model.Usuario;
-import com.newsoft.controle.repository.Grupos;
+import com.newsoft.controle.repository.GruposAcesso;
 
 /**
  * Essa é a classe de configuração do JPA, responsável por estabelecer a conexão com o Banco de dados
@@ -24,7 +24,7 @@ import com.newsoft.controle.repository.Grupos;
  *
  */
 @Configuration
-@EnableJpaRepositories(basePackageClasses = Grupos.class, enableDefaultTransactions = false)
+@EnableJpaRepositories(basePackageClasses = GruposAcesso.class, enableDefaultTransactions = false)
 @EnableTransactionManagement
 public class JPAConfig {
 

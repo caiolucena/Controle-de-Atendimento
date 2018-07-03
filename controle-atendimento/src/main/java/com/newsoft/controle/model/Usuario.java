@@ -1,7 +1,6 @@
 package com.newsoft.controle.model;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -19,7 +18,6 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.br.CPF;
 
 import com.newsoft.validation.AtributoConfirmacao;
 
@@ -59,9 +57,9 @@ public class Usuario implements Serializable {
 	@Fetch(FetchMode.SELECT)
 	@Size(min=1,message = "Selecione pelo menos um grupo")
 	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name = "usuario_has_grupo",joinColumns = @JoinColumn(name = "usuario_id")
-												, inverseJoinColumns = @JoinColumn(name = "grupo_id"))
-	private List <Grupo> grupos;
+	@JoinTable(name = "usuario_has_grupo_acesso",joinColumns = @JoinColumn(name = "usuario_id")
+												, inverseJoinColumns = @JoinColumn(name = "grupo_acesso_id"))
+	private List <GrupoAcesso> grupos;
 	
 	/**
 	 * M�todo Construtor da classe Usu�rio
@@ -143,11 +141,11 @@ public class Usuario implements Serializable {
 		this.confirmacaoSenha = confirmacaoSenha;
 	}
 
-	public List<Grupo> getGrupos() {
+	public List<GrupoAcesso> getGrupos() {
 		return grupos;
 	}
 
-	public void setGrupos(List<Grupo> grupos) {
+	public void setGrupos(List<GrupoAcesso> grupos) {
 		this.grupos = grupos;
 	}
 	

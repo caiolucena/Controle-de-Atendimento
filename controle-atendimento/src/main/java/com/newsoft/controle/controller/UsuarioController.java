@@ -15,7 +15,7 @@ import com.newosft.controle.service.exception.ItemDuplicadoException;
 import com.newosft.controle.service.exception.LoginDuplicadoException;
 import com.newosft.controle.service.exception.SenhaObrigatoriaUsuarioException;
 import com.newsoft.controle.model.Usuario;
-import com.newsoft.controle.repository.Grupos;
+import com.newsoft.controle.repository.GruposAcesso;
 import com.newsoft.controle.service.CadastroUsuarioService;
 
 @Controller
@@ -23,7 +23,7 @@ import com.newsoft.controle.service.CadastroUsuarioService;
 public class UsuarioController {
 
 	@Autowired
-	Grupos grupos;
+	GruposAcesso grupos;
 
 	@Autowired
 	CadastroUsuarioService cadastroUsuarioService;

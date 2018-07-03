@@ -28,9 +28,6 @@ public class Chamado {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	
-	
-	
 	@Column(name = "data_preenchimento")
 	private LocalDateTime dataPreenchimento;
 	
@@ -51,6 +48,12 @@ public class Chamado {
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Usuario usuario;
 	
+	@JoinColumn(name = "cliente_id")
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Cliente cliente;
+	
+	@Column(name = "nome_cliente")
+	private String nomeCliente;
 	
 	
 	private String observacao;
@@ -99,6 +102,22 @@ public class Chamado {
 	}
 
 	
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public String getNomeCliente() {
+		return nomeCliente;
+	}
+
+	public void setNomeCliente(String nomeCliente) {
+		this.nomeCliente = nomeCliente;
+	}
+
 	public LocalDateTime getDataPreenchimento() {
 		return dataPreenchimento;
 	}

@@ -76,6 +76,28 @@
 
 					<th:block th:include="fragments/MensagensErroValidacao"></th:block>
 					<!-- Linha do Nome -->
+					
+					
+					<div class="row">
+						<div class="form-group col-sm-3">
+							<label for="codigoCliente">Código do Cliente*</label> <input
+								id="codigoCliente" type="number" class="form-control js-cod"
+								th:field="*{cliente.id}"
+								th:onchange="|selecionouCliente(this.value,'@{/clientes}')|"
+								th:classappend="${#fields.hasErrors('cliente.id')}? is-invalid"
+								autocomplete="off" autofocus = "autofocus"/>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-sm-12">
+							<label for="nomeCliente">Nome do Cliente*</label> <input
+								id="nomeCliente" type="text" class="form-control"
+								th:field="*{nomeCliente}"
+								th:classappend="${#fields.hasErrors('nomeCliente')}? is-invalid"
+								autocomplete="off" />
+						</div>
+					</div>
+					
 					<div class="row">
 						<div class="form-group col-sm-3">
 							<label for="dataRecebimento">Data de Recebimento*</label> <input
@@ -101,6 +123,7 @@
 								id="consultor" th:field="*{consultor.id}" class="form-control"
 								th:classappend="${#fields.hasErrors('*{consultor.id}')}? is-invalid">
 								<option value="0">Selecione um Consultor</option>
+								
 								<option th:each="consultor: ${consultores}"
 									th:value="${consultor.id}" th:text="${consultor.nome}"></option>
 							</select>

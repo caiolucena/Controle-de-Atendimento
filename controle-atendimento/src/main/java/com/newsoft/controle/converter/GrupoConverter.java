@@ -3,14 +3,14 @@ package com.newsoft.controle.converter;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.util.StringUtils;
 
-import com.newsoft.controle.model.Grupo;
+import com.newsoft.controle.model.GrupoAcesso;
 
 /**
  * Essa classe é responsável por conter o método que atribui um código a um grupo
  * @author EquipeACL
  *
  */
-public class GrupoConverter implements Converter <String,Grupo> {
+public class GrupoConverter implements Converter <String,GrupoAcesso> {
 	
 	/**
 	 * Método responsável por atribuir um código a um grupo
@@ -18,9 +18,9 @@ public class GrupoConverter implements Converter <String,Grupo> {
 	 * @return grupo or null, dependendo da validação do código
 	 */
 	@Override
-	public Grupo convert(String codigo) {
+	public GrupoAcesso convert(String codigo) {
 		if(!StringUtils.isEmpty(codigo)) {
-			Grupo grupo = new Grupo();
+			GrupoAcesso grupo = new GrupoAcesso();
 			grupo.setId(Integer.valueOf(codigo));
 			return grupo;
 		}
