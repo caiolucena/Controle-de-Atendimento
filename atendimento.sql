@@ -48,7 +48,7 @@ CREATE TABLE `grupo_acesso` (
 # Data for table "grupo"
 #
 
-INSERT INTO `grupo_acesso` VALUES (1,'Administrador'),(2,'Gerente Financeiro'),(3,'Gerente Comercial'),(4,'Financeiro'),(5,'Comercial');
+INSERT INTO `grupo_acesso` VALUES (1,'Administrador'),(2,'Gerente Financeiro'),(3,'Gerente Comercial'),(4,'Financeiro'),(5,'Comercial'),(6,'Consultor');
 
 
 #
@@ -65,7 +65,7 @@ CREATE TABLE `permissao` (
 # Data for table "permissao"
 #
 
-INSERT INTO `permissao` VALUES (1,'CADASTRAR_USUARIO'),(2,'CADASTRAR_CHAMADO');
+INSERT INTO `permissao` VALUES (1,'CADASTRAR_USUARIO'),(2,'CADASTRAR_CHAMADO'),(3,'CADASTRAR_PROSPECCAO');
 
 #
 # Structure for table "grupo_has_permissao"
@@ -92,6 +92,9 @@ INSERT INTO `grupo_acesso_has_permissao` VALUES (1,1);
 #PERMISSÕES DO COMERCIAL (ISLA) 5 
 INSERT INTO `grupo_acesso_has_permissao` VALUES (5,2);
 
+#PERMISSÕES DOS CONSULTORES
+INSERT INTO `grupo_acesso_has_permissao` VALUES (6,3);
+
 #
 # Structure for table "usuario"
 #
@@ -112,6 +115,34 @@ INSERT INTO `usuario` VALUES (1,'Caio Lucena','caio','$2a$10$8IAlZZ5BX1huMcpp2kg
 INSERT INTO `usuario` VALUES (2,'Rodolfo','rodolfo','$2a$10$8IAlZZ5BX1huMcpp2kgrQ.pRfiWe2s1BDhH7YiKiqA8mdcsQvw24e');
 INSERT INTO `usuario` VALUES (3,'Glenio','glenio','$2a$10$8IAlZZ5BX1huMcpp2kgrQ.pRfiWe2s1BDhH7YiKiqA8mdcsQvw24e');
 
+
+create table `vendedor` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(50),
+  `fone_contato` varchar(20),
+  `celular` varchar(20),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+INSERT INTO VENDEDOR (id, NOME, FONE_CONTATO, CELULAR)
+              VALUES (1, 'EDINALDO', '', '');
+INSERT INTO VENDEDOR (id, NOME, FONE_CONTATO, CELULAR)
+              VALUES (3, 'RODRIGO', '83 98778-0191', '83 98852-0191');
+INSERT INTO VENDEDOR (id, NOME, FONE_CONTATO, CELULAR)
+              VALUES (5, 'ORLANDO', '89 9 8101-4563', '83 9 9937-3175');
+INSERT INTO VENDEDOR (id, NOME, FONE_CONTATO, CELULAR)
+              VALUES (6, 'CAMILA', '', '');
+INSERT INTO VENDEDOR (id, NOME, FONE_CONTATO, CELULAR)
+              VALUES (8, 'ISLA', '', '');
+INSERT INTO VENDEDOR (id, NOME, FONE_CONTATO, CELULAR)
+              VALUES (10, 'SUELIA', '', '');
+INSERT INTO VENDEDOR (id, NOME, FONE_CONTATO, CELULAR)
+              VALUES (12, 'WALNNER', '', '');
+INSERT INTO VENDEDOR (id, NOME, FONE_CONTATO, CELULAR)
+              VALUES (15, 'ALESANDRO', '', '');
+
+
 #
 # Structure for table "usuario_has_grupo"
 #
@@ -129,9 +160,11 @@ CREATE TABLE `usuario_has_grupo_acesso` (
 # Data for table "usuario_has_grupo"
 #
 
-INSERT INTO `usuario_has_grupo_acesso` VALUES (1,1),(1,2),(1,3),(1,4),(1,5);
-INSERT INTO `usuario_has_grupo_acesso` VALUES (2,1),(2,2),(2,3),(2,4),(2,5);
-INSERT INTO `usuario_has_grupo_acesso` VALUES (3,1),(3,2),(3,3),(3,4),(3,5);
+
+
+INSERT INTO `usuario_has_grupo_acesso` VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,6);
+INSERT INTO `usuario_has_grupo_acesso` VALUES (2,1),(2,2),(2,3),(2,4),(2,5),(2,6);
+INSERT INTO `usuario_has_grupo_acesso` VALUES (3,1),(3,2),(3,3),(3,4),(3,5),(3,6);
 
 
 create table `grupo`(
@@ -165,13 +198,6 @@ create table `cliente` (
   REFERENCES `atendimento`.`grupo` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-create table `vendedor` (
-  `id` int(11) NOT NULL,
-  `nome` varchar(50),
-  `fone_contato` varchar(20),
-  `celular` varchar(20),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 create table `chamado` (
   `id` int(11) NOT NULL auto_increment,
@@ -180,7 +206,11 @@ create table `chamado` (
   `data_envio` date NOT NULL,
   `observacao` varchar(240),
   `status` enum("PENDENTE","REALIZADO"),
+  `telefone` varchar(20) NOT NULL,
+  `telefone_opt` varchar(20),
+  `email` varchar(50),
   `nome_cliente` varchar(100) NOT NULL, #no caso de ser prospecção,  o nome do cliente vai ser inserido
+  `nome_consultor` varchar(50) NOT NULL,
   `vendedor_id` int(11) NOT NULL, 
   `usuario_id` int(11) NOT NULL,
   `cliente_id` int(11),#se for cliente antigo, vai ser inserido o código
@@ -192,7 +222,7 @@ create table `chamado` (
   FOREIGN KEY (`cliente_id`)
   REFERENCES `atendimento`.`cliente` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+select * from chamado;
 INSERT INTO cliente (id, NOME, NOMEFANTASIA, CIDADER, UFR, GRUPO, FONERESIDENCIAL, FONEMOVEL, FAX, FONECONTATO, VENDEDOR)
               VALUES (1, 'PROSPECÇÃO - Insira o nome do cliente aqui', 'PROSPECÇÃO - Insira o nome do cliente aqui','SANTA RITA', 'PB', 1, '30320583', '999347218', '', '', 1);
 INSERT INTO cliente (id, NOME, NOMEFANTASIA, CIDADER, UFR, GRUPO, FONERESIDENCIAL, FONEMOVEL, FAX, FONECONTATO, VENDEDOR)
@@ -2338,23 +2368,6 @@ INSERT INTO cliente (id, NOME, NOMEFANTASIA, CIDADER, UFR, GRUPO, FONERESIDENCIA
 INSERT INTO cliente (id, NOME, NOMEFANTASIA, CIDADER, UFR, GRUPO, FONERESIDENCIAL, FONEMOVEL, FAX, FONECONTATO, VENDEDOR)
               VALUES (1630, 'SHOTGUN STORE - COMERCIO DE ARMAS E MUNICOES EIRELI', 'SHOTGUN STORE', 'CAMPINA GRANDE', 'PB', 9, '', '', '', '8898-1016', 12);
 
-
-INSERT INTO VENDEDOR (id, NOME, FONE_CONTATO, CELULAR)
-              VALUES (1, 'EDINALDO', '', '');
-INSERT INTO VENDEDOR (id, NOME, FONE_CONTATO, CELULAR)
-              VALUES (3, 'RODRIGO', '83 98778-0191', '83 98852-0191');
-INSERT INTO VENDEDOR (id, NOME, FONE_CONTATO, CELULAR)
-              VALUES (5, 'ORLANDO', '89 9 8101-4563', '83 9 9937-3175');
-INSERT INTO VENDEDOR (id, NOME, FONE_CONTATO, CELULAR)
-              VALUES (6, 'CAMILA', '', '');
-INSERT INTO VENDEDOR (id, NOME, FONE_CONTATO, CELULAR)
-              VALUES (8, 'ISLA', '', '');
-INSERT INTO VENDEDOR (id, NOME, FONE_CONTATO, CELULAR)
-              VALUES (10, 'SUELIA', '', '');
-INSERT INTO VENDEDOR (id, NOME, FONE_CONTATO, CELULAR)
-              VALUES (12, 'WALNNER', '', '');
-INSERT INTO VENDEDOR (id, NOME, FONE_CONTATO, CELULAR)
-              VALUES (15, 'ALESANDRO', '', '');
 
 
 
