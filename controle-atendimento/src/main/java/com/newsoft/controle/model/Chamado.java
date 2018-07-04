@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -60,6 +62,17 @@ public class Chamado {
 	@Column(name = "nome_consultor")
 	private String nomeConsultor;
 	
+	@ManyToOne
+	@JoinColumn(name = "cidade_id")
+	@Valid
+	private Cidade cidade;
+	
+	@Transient
+	private Estado estado;
+	
+	
+	
+	@NotBlank(message = "Insira informações sobre este cliente/chamado")
 	private String observacao;
 	
 	@NotBlank(message = " Telefone do cliente é obrigatório!")
@@ -97,6 +110,24 @@ public class Chamado {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	
+	
+	public Cidade getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
+	}
+
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 
 	public Status getStatus() {

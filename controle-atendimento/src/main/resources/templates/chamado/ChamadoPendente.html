@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="'layout/LayoutPadrao'">
+
+<head>
+<title>Cadastro de Chamado</title>
+</head>
+<body>
+	<section>
+		<!-- Right Panel -->
+
+		<div id="right-panel" class="right-panel" layout:fragment="conteudo">
+
+			<!-- Header-->
+			<header id="header" class="header">
+
+				<div class="header-menu">
+
+					<div class="col-sm-7">
+						<a id="menuToggle" class="menutoggle pull-left"><i
+							class="fa fa fa-tasks"></i></a>
+						<div class="header-left">
+							<div></div>
+
+							<div></div>
+						</div>
+					</div>
+
+					<div class="col-sm-5 float-right">
+						<ul>
+							<li style="list-style-type: none" class="float-right">
+								<p class="navbar-text"
+									th:text="${#authentication.principal.usuario.nome}">Usuario</p>
+								<a class="nav-link float-right " th:href="@{/logout}"><i
+									class="fa fa-sign-out"></i>Sair</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+			</header>
+			<!-- /header -->
+			<!-- Header-->
+
+			<!-- até aqui tem q ter em todos -->
+			<div class="breadcrumbs">
+				<div class="col-sm-4">
+					<div class="page-header float-left">
+						<div class="page-title">
+							<h1>Visualização do Chamado</h1>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-8">
+					<div class="page-header float-right">
+						<div class="page-title">
+							<ol class="breadcrumb text-right">
+								<li class="active"><a href="#" data-toggle="modal"
+									data-target="#modalHelpCadastroUsuario">Dúvidas no
+										preenchimento? Clique aqui</a></li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div>
+
+				<form class="form-vertical  js-form-loading content mt-3">
+
+
+					<div class="row">
+						<div class="form-group col-sm-4">
+							<label for="codigoCliente" style="font-weight: bold">Código:
+							</label> <label id="codigoCliente" th:text="${chamado.cliente.id}"
+								style="text-align: center"> </label>
+						</div>
+						<div class="form-group col-sm-8">
+							<label for="nomeCliente" style="font-weight: bold">Nome
+								do Cliente: </label> <label id="nomeCliente"
+								th:text="${chamado.nomeCliente}"> </label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-sm-4">
+							<label for="cidade" style="font-weight: bold">Cidade: </label> <label
+								id="cidade" th:text="${chamado.cidade.nome}"> </label>
+						</div>
+						<div class="form-group col-sm-4">
+							<label for="estado" style="font-weight: bold">Estado:
+							</label> <label id="estado" th:text="${chamado.cidade.estado.sigla}"> </label>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="form-group col-sm-4">
+							<label for="email" style="font-weight: bold">Email: </label> <label
+								id="email" th:text="${chamado.email}"> </label>
+						</div>
+						<div class="form-group col-sm-4">
+							<label for="telefone" style="font-weight: bold">Telefone:
+							</label> <label id="telefone" th:text="${chamado.telefone}"> </label>
+						</div>
+						<div class="form-group col-sm-4">
+							<label for="telefoneOpt" style="font-weight: bold">Telefone
+								Opcional:</label> <label id="telefoneOpt"
+								th:text="${chamado.telefoneOpt}"> </label>
+						</div>
+					</div>
+
+					<div class="row">
+						<!-- 						<div class="form-group col-sm-4">
+							<label for="dataRecebimento" style="font-weight: bold">Data
+								de Recebimento do Chamado: </label> <label id="dataRecebimento"
+								th:text="${{chamado.dataRecebimento}}"
+								style="text-align: center"> </label>
+						</div>
+						 -->
+						<div class="form-group col-sm-4">
+							<label for="dataEnvio" style="font-weight: bold">Data de
+								Envio do Chamado:</label> <label id="dataEnvio"
+								th:text="${{chamado.dataEnvio}}" style="text-align: center">
+							</label>
+						</div>
+						<div class="form-group  col-sm-4">
+							<label for="nomeConsultor" style="font-weight: bold">Nome
+								do Consultor: </label> <label id="nomeConsultor"
+								th:text="${chamado.nomeConsultor}"> </label>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="form-group col-sm-12">
+							<label for="descricao" style="font-weight: bold">Informações
+								adicionais:</label> <label id="descricao"
+								th:text="${chamado.observacao}"> </label>
+						</div>
+					</div>
+					<a th:href="@{/prospeccao/nova}" class="btn  btn-primary">Preencher
+						Prospecção</a>
+					<a th:href="@{/index}" class="btn btn-danger">Voltar</a>
+				</form>
+			</div>
+			<div th:replace="modal/usuario/HelpCadastroUsuario :: modal"></div>
+		</div>
+
+	</section>
+	<th:block layout:fragment="javascript-extra">
+		<!-- <script th:src="@{/javascripts/usuario.remover.js}"></script> -->
+	</th:block>
+
+</body>
+
+</html>

@@ -77,112 +77,137 @@
 					<th:block th:include="fragments/MensagensErroValidacao"></th:block>
 					<!-- Linha do Nome -->
 
-
-					<div class="row">
-						<!--  	<div class="form-group col-sm-2">
-							Já é Cliente?<input type="checkbox" id="jaCliente" checked="checked"
-								onChange="usouCheckbox()">
+					<div class="card">
+						<div class="card-header">
+							<h6>Dados do Cliente</h6>
 						</div>
-						-->
-						<div class="form-group col-sm-3">
-							Tipo de Cliente*
-							<div class="radio">
-								<label class="form-control"><input
-									id="clienteNaoCadastrado" type="radio" name="optradio"
-									onChange="usouCheckbox()">Cliente sem Cadastro</label>
+						<div class="card-body card-block">
+							<div class="row">
+								<div class="form-group col-sm-3">
+									Tipo de Cliente*
+									<div class="radio-inline">
+										<label><input id="clienteNaoCadastrado" type="radio"
+											name="optradio" onChange="usouCheckbox()">Cliente sem
+											Cadastro</label>
+									</div>
+									<div class="radio-inline">
+										<label><input id="clienteCadastrado" type="radio"
+											name="optradio" checked="checked" onChange="usouCheckbox()">Cliente
+											Cadastrado </label>
+									</div>
+
+								</div>
+
 							</div>
-							<div class="radio">
-								<label class="form-control"><input
-									id="clienteCadastrado" type="radio" name="optradio"
-									checked="checked" onChange="usouCheckbox()">Cliente
-									Cadastrado </label>
+
+							<div class="row">
+								<div class="form-group col-sm-2">
+									<label for="codigoCliente">Código*</label> <input
+										id="codigoCliente" type="text" class="form-control js-cod"
+										th:field="*{cliente.id}"
+										th:onchange="|selecionouCliente(this.value,'@{/clientes}')|"
+										th:classappend="${#fields.hasErrors('cliente.id')}? is-invalid"
+										autocomplete="off" autofocus="autofocus"
+										style="text-align: center" />
+								</div>
+								<div class="form-group col-sm-7">
+									<label for="nomeCliente">Nome do Cliente*</label> <input
+										id="nomeCliente" type="text" class="form-control"
+										th:field="*{nomeCliente}"
+										th:classappend="${#fields.hasErrors('nomeCliente')}? is-invalid"
+										autocomplete="off" readonly="readonly" />
+								</div>
+
+								<div class="form-group col-sm-3">
+									<label for="email">Email*</label> <input id="email" type="text"
+										class="form-control" th:field="*{email}"
+										th:classappend="${#fields.hasErrors('email')}? is-invalid"
+										autocomplete="off" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-3">
+									<label for="telefone">Telefone*</label> <input id="telefone"
+										type="text" class="form-control js-phone-number"
+										th:field="*{telefone}"
+										th:classappend="${#fields.hasErrors('telefone')}? is-invalid"
+										autocomplete="off" />
+								</div>
+								<div class="form-group col-sm-3">
+									<label for="telefoneOpt">Telefone Opcional</label> <input
+										id="telefoneOpt" type="text"
+										class="form-control js-phone-number" th:field="*{telefoneOpt}"
+										th:classappend="${#fields.hasErrors('telefoneOpt')}? is-invalid"
+										autocomplete="off" />
+								</div>
+
+								<div class="form-group col-sm-2">
+									<label for="uf" class="control-label">UF</label> <select
+										th:onchange="|selecionouEstado(this.value,'@{/cidades}')|"
+										id="uf" class="form-control" th:field="*{cidade.estado.id}">
+										<option value="0">Selecione a UF</option>
+										<option th:each="estado: ${estados}" th:value="${estado.id}"
+											th:text="${estado.sigla}"></option>
+									</select>
+								</div>
+								<div class="form-group col-sm-4">
+									<label for="cidade" class="control-label">Cidade</label> <select
+										id="cidade" th:field="*{cidade.id}" class="form-control"
+										th:classappend="${#fields.hasErrors('*{cidade.id}')}? is-invalid">
+										<option value="0">Selecione uma UF</option>
+										<option th:each="cidade: ${cidades}" th:value="${cidade.id}"
+											th:text="${cidade.nome}"></option>
+									</select>
+								</div>
 							</div>
 
 						</div>
-
 					</div>
 
-					<div class="row">
-						<div class="form-group col-sm-2">
-							<label for="codigoCliente">Código do Cliente*</label> <input
-								id="codigoCliente" type="text" class="form-control js-cod"
-								th:field="*{cliente.id}"
-								th:onchange="|selecionouCliente(this.value,'@{/clientes}')|"
-								th:classappend="${#fields.hasErrors('cliente.id')}? is-invalid"
-								autocomplete="off" autofocus="autofocus"
-								style="text-align: center" />
+					<div class="card">
+						<div class="card-header">
+							<h6>Dados do Chamado</h6>
 						</div>
-						<div class="form-group col-sm-8">
-							<label for="nomeCliente">Nome do Cliente*</label> <input
-								id="nomeCliente" type="text" class="form-control"
-								th:field="*{nomeCliente}"
-								th:classappend="${#fields.hasErrors('nomeCliente')}? is-invalid"
-								autocomplete="off" readonly="readonly" />
-						</div>
-					</div>
-					<div class="row">
-						<div class="form-group col-sm-4">
-							<label for="email">Email*</label> <input
-								id="email" type="text" class="form-control"
-								th:field="*{email}"
-								th:classappend="${#fields.hasErrors('email')}? is-invalid"
-								autocomplete="off" />
-						</div>
-						<div class="form-group col-sm-4">
-							<label for="telefone">Telefone*</label> <input
-								id="telefone" type="text" class="form-control js-phone-number"
-								th:field="*{telefone}"
-								th:classappend="${#fields.hasErrors('telefone')}? is-invalid"
-								autocomplete="off"/>
-						</div>
-						<div class="form-group col-sm-4">
-							<label for="telefoneOpt">Telefone Opcional</label> <input
-								id="telefoneOpt" type="text" class="form-control js-phone-number"
-								th:field="*{telefoneOpt}"
-								th:classappend="${#fields.hasErrors('telefoneOpt')}? is-invalid"
-								autocomplete="off"/>
-						</div>
-					</div>
+						<div class="card-body card-block">
+							<div class="row">
+								<div class="form-group col-sm-3">
+									<label for="dataRecebimento">Data de Recebimento*</label> <input
+										id="dataRecebimento" type="text" class="form-control js-date"
+										th:field="*{dataRecebimento}"
+										th:classappend="${#fields.hasErrors('dataRecebimento')}? is-invalid"
+										autocomplete="off" style="text-align: center" />
+								</div>
+								<div class="form-group col-sm-3">
+									<label for="dataEnvio">Data de Envio*</label> <input
+										id="dataEnvio" type="text" class="form-control js-date"
+										th:field="*{dataEnvio}"
+										th:classappend="${#fields.hasErrors('dataEnvio')}? is-invalid"
+										autocomplete="off" style="text-align: center" />
+								</div>
+								<div class="form-group  col-sm-4 col-lg-4">
+									<label for="consultor" class="control-label">Consultor*</label>
+									<select id="consultor" th:field="*{consultor.id}"
+										class="form-control"
+										th:classappend="${#fields.hasErrors('*{consultor.id}')}? is-invalid">
+										<option value="0">Selecione um Consultor</option>
 
-					<div class="row">
-						<div class="form-group col-sm-3">
-							<label for="dataRecebimento">Data de Recebimento*</label> <input
-								id="dataRecebimento" type="text" class="form-control js-date"
-								th:field="*{dataRecebimento}"
-								th:classappend="${#fields.hasErrors('dataRecebimento')}? is-invalid"
-								autocomplete="off" style="text-align: center" />
-						</div>
-					</div>
+										<option th:each="consultor: ${consultores}"
+											th:value="${consultor.id}" th:text="${consultor.nome}"></option>
+									</select>
+								</div>
 
-					<div class="row">
-						<div class="form-group col-sm-3">
-							<label for="dataEnvio">Data de Envio*</label> <input
-								id="dataEnvio" type="text" class="form-control js-date"
-								th:field="*{dataEnvio}"
-								th:classappend="${#fields.hasErrors('dataEnvio')}? is-invalid"
-								autocomplete="off" style="text-align: center" />
-						</div>
-					</div>
-					<div class="row">
-						<div class="form-group  col-sm-4 col-lg-3">
-							<label for="consultor" class="control-label">Consultor*</label> <select
-								id="consultor" th:field="*{consultor.id}" class="form-control"
-								th:classappend="${#fields.hasErrors('*{consultor.id}')}? is-invalid">
-								<option value="0">Selecione um Consultor</option>
+							</div>
 
-								<option th:each="consultor: ${consultores}"
-									th:value="${consultor.id}" th:text="${consultor.nome}"></option>
-							</select>
-						</div>
-					</div>
-					<div class="row">
-						<div class="form-group col-sm-12">
-							<label for="descricao">Informações adicionais</label>
-							<textarea id="descricao" class="form-control"
-								placeholder="Se necessário, insira informações adicionais sobre esse chamado"
-								th:field="*{observacao}"
-								th:classappend="${#fields.hasErrors('*{observacao}')}? is-invalid"
-								autocomplete="off"></textarea>
+							<div class="row">
+								<div class="form-group col-sm-12">
+									<label for="descricao">Informações adicionais</label>
+									<textarea id="descricao" class="form-control"
+										placeholder="Se necessário, insira informações adicionais sobre esse chamado"
+										th:field="*{observacao}"
+										th:classappend="${#fields.hasErrors('*{observacao}')}? is-invalid"
+										autocomplete="off"></textarea>
+								</div>
+							</div>
 						</div>
 					</div>
 					<button type="submit" class="btn  btn-primary">Salvar</button>

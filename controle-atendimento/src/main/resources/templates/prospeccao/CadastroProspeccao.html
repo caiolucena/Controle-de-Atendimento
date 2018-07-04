@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="'layout/LayoutPadrao'">
+
+<head>
+<title>Cadastro de Prospecção</title>
+</head>
+<body>
+	<section>
+		<!-- Right Panel -->
+
+		<div id="right-panel" class="right-panel" layout:fragment="conteudo">
+
+			<!-- Header-->
+			<header id="header" class="header">
+
+				<div class="header-menu">
+
+					<div class="col-sm-7">
+						<a id="menuToggle" class="menutoggle pull-left"><i
+							class="fa fa fa-tasks"></i></a>
+						<div class="header-left">
+							<div></div>
+
+							<div></div>
+						</div>
+					</div>
+
+					<div class="col-sm-5 float-right">
+						<ul>
+							<li style="list-style-type: none" class="float-right">
+								<p class="navbar-text"
+									th:text="${#authentication.principal.usuario.nome}">Usuario</p>
+								<a class="nav-link float-right " th:href="@{/logout}"><i
+									class="fa fa-sign-out"></i>Sair</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+			</header>
+			<!-- /header -->
+			<!-- Header-->
+
+			<!-- até aqui tem q ter em todos -->
+			<div class="breadcrumbs">
+				<div class="col-sm-4">
+					<div class="page-header float-left">
+						<div class="page-title">
+							<h1>Cadastro de Prospecção</h1>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-8">
+					<div class="page-header float-right">
+						<div class="page-title">
+							<ol class="breadcrumb text-right">
+								<li class="active"><a href="#" data-toggle="modal"
+									data-target="#modalHelpCadastroUsuario">Dúvidas no
+										preenchimento? Clique aqui</a></li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div>
+
+				<th:block th:include="fragments/MensagemSucesso"></th:block>
+
+				<form method="POST"
+					class="form-vertical  js-form-loading content mt-3"
+					th:object="${prospeccao}" th:action="@{/prospeccoes/nova}">
+
+					<th:block th:include="fragments/MensagensErroValidacao"></th:block>
+					<!-- Linha do Nome -->
+
+					<div class="card">
+						<div class="card-header">
+							<h6>Informações sobre o Chamado</h6>
+						</div>
+						<div class = "card-body card-block">
+							<div class="row">
+								<div class="form-group col-sm-2">
+									<label for="codigoCliente">Código*</label> <input
+										id="codigoCliente" type="text" class="form-control"
+										th:field="*{cliente.id}" autocomplete="off"
+										autofocus="autofocus" readonly="readonly"
+										style="text-align: center" />
+								</div>
+								<div class="form-group col-sm-8">
+									<label for="nomeCliente">Nome do Cliente*</label> <input
+										id="nomeCliente" type="text" class="form-control"
+										th:field="*{nomeCliente}"
+										th:classappend="${#fields.hasErrors('nomeCliente')}? is-invalid"
+										autocomplete="off" readonly="readonly" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-4">
+									<label for="email">Email*</label> <input id="email" type="text"
+										class="form-control" th:field="*{email}"
+										th:classappend="${#fields.hasErrors('email')}? is-invalid"
+										autocomplete="off" readonly="readonly" />
+								</div>
+								<div class="form-group col-sm-4">
+									<label for="telefone">Telefone*</label> <input id="telefone"
+										type="text" class="form-control js-phone-number"
+										th:field="*{telefone}"
+										th:classappend="${#fields.hasErrors('telefone')}? is-invalid"
+										autocomplete="off" readonly="readonly" />
+								</div>
+								<div class="form-group col-sm-4">
+									<label for="telefoneOpt">Telefone Opcional</label> <input
+										id="telefoneOpt" type="text"
+										class="form-control js-phone-number" th:field="*{telefoneOpt}"
+										th:classappend="${#fields.hasErrors('telefoneOpt')}? is-invalid"
+										autocomplete="off" readonly="readonly" />
+								</div>
+							</div>
+							<div class=row>
+								<div class="form-group col-sm-2">
+									<label for="uf" class="control-label">UF</label> <input id="uf"
+										class="form-control" th:field="*{cidade.estado.id}"
+										readonly="readonly" />
+
+								</div>
+								<div class="form-group col-sm-4">
+									<label for="cidade" class="control-label">Cidade</label> <input
+										id="cidade" th:field="*{cidade.id}" class="form-control"
+										th:classappend="${#fields.hasErrors('*{cidade.id}')}? is-invalid"
+										readonly="readonly" />
+								</div>
+
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-12">
+									<label for="infoChamado">Informações adicionais</label>
+									<textarea id="infoChamado" class="form-control"
+										placeholder="Não há observações sobre este chamado"
+										th:field="*{observacao}" autocomplete="off"
+										readonly="readonly"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+					<button type="submit" class="btn  btn-primary">Salvar</button>
+					<a th:href="@{/index}" class="btn btn-danger">Cancelar</a>
+				</form>
+			</div>
+			<div th:replace="modal/usuario/HelpCadastroUsuario :: modal"></div>
+
+
+		</div>
+
+	</section>
+	<th:block layout:fragment="javascript-extra">
+		<script src="../static/javascripts/prospeccao.js"
+			th:src="@{/javascripts/prospeccao.js}"></script>
+	</th:block>
+
+
+
+</body>
+
+</html>

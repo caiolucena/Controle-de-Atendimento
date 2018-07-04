@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "grupo_acesso")
 public class GrupoAcesso implements Serializable{
@@ -25,6 +27,8 @@ public class GrupoAcesso implements Serializable{
 	
 	private String nome;
 	
+	
+	@JsonIgnore
 	@NotNull(message = "Selecione pelo menos uma permissao")
 	@ManyToMany
 	@JoinTable(name = "grupo_acesso_has_permissao",joinColumns = @JoinColumn(name = "grupo_acesso_id")

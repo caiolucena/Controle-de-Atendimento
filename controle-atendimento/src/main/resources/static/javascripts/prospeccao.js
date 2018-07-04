@@ -1,7 +1,50 @@
 var $ = jQuery;
-function selecionouEstado(id, url) {
+
+
+$(function() {
 	
-	console.log(url);
+	console.log("executei aqui!");
+	
+	$.ajax({
+		url : '/atendimento/chamados',
+		method : 'POST',
+		contentType : 'application/json',
+		error : erroChamado,
+		success : adicionarCamposChamado
+	});
+	
+	function adicionarCamposChamado(chamado) {
+		console.log("Nao deu erro aqui");
+		var codigo = $('#codigoCliente');
+		var nome = $('#nomeCliente');
+		var telefone = $('#telefone');
+		var telefoneOpt = $('#telefoneOpt');
+		var email = $('#email');
+		var cidade = $('#cidade');
+		var estado = $('#uf');
+		var infoChamado = $('#infoChamado');
+		
+		codigo.val(chamado.cliente.id);
+		nome.val(chamado.nomeCliente);
+		telefone.val(chamado.telefone);
+		telefoneOpt.val(chamado.telefoneOpt);
+		email.val(chamado.email);
+		cidade.val(chamado.cidade.nome);
+		estado.val(chamado.cidade.estado.sigla);
+		infoChamado.val(chamado.observacao);
+		
+		
+	}
+	function erroChamado() {
+		var nomeCliente = $("#nomeCliente");
+	
+		nomeCliente.val("Não há cliente cadastrado com o código informado");
+	}
+	
+});
+
+
+function selecionouEstado(id, url) {
 	$.ajax({
 		url : url,
 		method : 'POST',
@@ -29,32 +72,6 @@ function selecionouEstado(id, url) {
 	}
 
 }
-
-function usouCheckbox(){
-	var radioCadastrado = $("#clienteCadastrado");
-	var radioNaoCadastrado = $("#clienteNaoCadastrado");
-	var codigo = $("#codigoCliente");
-	var nome = $("#nomeCliente");
-
-	if(radioCadastrado.prop("checked")){
-
-		codigo.prop('readonly',false);
-		nome.prop('readonly',true);
-		nome.val('');
-		codigo.val('');
-		codigo.focus();
-	}
-	
-	else if(radioNaoCadastrado.prop("checked")){
-
-		nome.val('PROSPECÇÃO - Insira o nome do cliente aqui');
-		nome.focus();
-		codigo.val(0);
-		codigo.prop('readonly',true);	
-		nome.prop('readonly',false);
-	}
-}
-
 
 function selecionouCliente(id, url) {
 	$.ajax({

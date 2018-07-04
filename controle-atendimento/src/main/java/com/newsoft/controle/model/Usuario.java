@@ -19,6 +19,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.newsoft.validation.AtributoConfirmacao;
 
 
@@ -53,7 +54,8 @@ public class Usuario implements Serializable {
 	
 	@NotBlank(message = " Nome de usuário é obrigatório")
 	protected String login;
-		
+	
+	@JsonIgnore	
 	@Fetch(FetchMode.SELECT)
 	@Size(min=1,message = "Selecione pelo menos um grupo")
 	@ManyToMany(fetch=FetchType.EAGER)
